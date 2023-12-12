@@ -1,0 +1,34 @@
+import { AdaptedEvent, EventTypes, TouchEventType } from '../interfaces';
+export default abstract class EventManager<T> {
+    protected readonly view: T;
+    protected pointersInBounds: number[];
+    protected activePointersCounter: number;
+    constructor(view: T);
+    abstract setListeners(): void;
+    protected abstract mapEvent(event: Event, eventType: EventTypes, index?: number, touchEventType?: TouchEventType): AdaptedEvent;
+    protected onPointerDown(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerAdd(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerUp(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerRemove(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerMove(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerLeave(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerEnter(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerCancel(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerOutOfBounds(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerMoveOver(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    protected onPointerMoveOut(_event: AdaptedEvent, _sourceEvent?: TouchEvent | PointerEvent): void;
+    setOnPointerDown(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerAdd(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerUp(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerRemove(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerMove(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerLeave(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerEnter(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerCancel(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerOutOfBounds(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerMoveOver(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    setOnPointerMoveOut(callback: (event: AdaptedEvent, sourceEvent?: TouchEvent | PointerEvent) => void): void;
+    protected markAsInBounds(pointerId: number): void;
+    protected markAsOutOfBounds(pointerId: number): void;
+    resetManager(): void;
+}
